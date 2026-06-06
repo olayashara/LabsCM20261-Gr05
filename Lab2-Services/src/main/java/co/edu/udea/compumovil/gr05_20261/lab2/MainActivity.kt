@@ -17,7 +17,16 @@ import androidx.work.WorkManager
 import co.edu.udea.compumovil.gr05_20261.lab2.model.Article
 import co.edu.udea.compumovil.gr05_20261.lab2.ui.theme.Labs20261Gr05Theme
 import co.edu.udea.compumovil.gr05_20261.lab2.worker.NewsWorker
-import kotlinx.coroutines.launch
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,21 +102,63 @@ fun ArticleList(
     modifier: Modifier = Modifier,
     onArticleClick: (Article) -> Unit
 ) {
-    LazyColumn(modifier = modifier.fillMaxSize().padding(16.dp)) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        contentPadding = PaddingValues(0.dp) // Jetnews usa 0 de padding externo, lo maneja interno
+    ) {
+        item {
+            Text(
+                modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp),
+                text = "Últimas Noticias",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+        }
         items(articles) { article ->
-            Card(
+            // Esta es la réplica exacta de PostCardTop del archivo original de Jetnews
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-                    .clickable { onArticleClick(article) },
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                    .clickable { onArticleClick(article) }
+                    .padding(16.dp)
             ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(text = article.title, style = MaterialTheme.typography.titleLarge)
-                    // Usamos el prefijo de idioma para el autor
-                    Text(text = "${stringResource(id = R.string.author_prefix)}${article.author}", style = MaterialTheme.typography.bodyMedium)
+                // Simulamos la imagen usando el mismo modificador exacto de Jetnews
+                val imageModifier = Modifier
+                    .heightIn(min = 180.dp)
+                    .fillMaxWidth()
+                    .clip(shape = MaterialTheme.shapes.large)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
+
+                Box(modifier = imageModifier, contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = null,
+                        modifier = Modifier.size(48.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                    )
                 }
+                Spacer(Modifier.height(16.dp))
+
+                Text(
+                    text = article.title,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+                Text(
+                    text = "${stringResource(id = R.string.author_prefix)}${article.author}",
+                    style = MaterialTheme.typography.labelLarge,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
+                Text(
+                    text = "06 Junio • 5 min read", // Dato estático tal como el preview de Jetnews
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
+            // El divisor exacto de Jetnews
+            Divider(
+                modifier = Modifier.padding(horizontal = 14.dp),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
+            )
         }
     }
 }
@@ -118,17 +169,79 @@ fun ArticleDetail(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit
 ) {
-    Column(modifier = modifier.fillMaxSize().padding(16.dp)) {
-        Button(onClick = onBackClick) {
-            // Botón de volver en el idioma correcto
-            Text(stringResource(id = R.string.btn_back))
+    // Réplica de PostContent.kt (pantalla de detalle)
+    LazyColumn(
+        modifier = modifier.padding(horizontal = 16.dp)
+    ) {
+        item {
+            Spacer(Modifier.height(8.dp))
+            TextButton(onClick = onBackClick) {
+                Text("← ${stringResource(id = R.string.btn_back)}")
+            }
+            Spacer(Modifier.height(8.dp))
+
+            // PostHeaderImage exacto
+            val imageModifier = Modifier
+                .heightIn(min = 180.dp)
+                .fillMaxWidth()
+                .clip(shape = MaterialTheme.shapes.large)
+                .background(MaterialTheme.colorScheme.surfaceVariant)
+
+            Box(modifier = imageModifier, contentAlignment = Alignment.Center) {
+                Icon(
+                    imageVector = Icons.Default.Info,
+                    contentDescription = null,
+                    modifier = Modifier.size(64.dp),
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                )
+            }
+            Spacer(Modifier.height(16.dp))
+
+            // Título
+            Text(article.title, style = MaterialTheme.typography.headlineLarge)
+            Spacer(Modifier.height(16.dp))
         }
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(text = article.title, style = MaterialTheme.typography.headlineMedium)
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "${stringResource(id = R.string.author_prefix)}${article.author}", style = MaterialTheme.typography.titleMedium)
-        Spacer(modifier = Modifier.height(16.dp))
-        // Texto de contenido simulado en el idioma correcto
-        Text(text = stringResource(id = R.string.content_placeholder), style = MaterialTheme.typography.bodyLarge)
+
+        item {
+            // PostMetadata exacto
+            Row(modifier = Modifier.padding(bottom = 24.dp)) {
+                // Jetnews usa ic_account_circle, aquí usamos el equivalente de Compose
+                Box(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primaryContainer),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
+                Spacer(Modifier.width(8.dp))
+                Column {
+                    Text(
+                        text = "${stringResource(id = R.string.author_prefix)}${article.author}",
+                        style = MaterialTheme.typography.labelLarge,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                    Text(
+                        text = "06 Junio • 5 min read",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+        }
+
+        item {
+            // Paragraph exacto simulado
+            Text(
+                text = stringResource(id = R.string.content_placeholder) + "\n\n" + stringResource(id = R.string.content_placeholder),
+                // Este es el estilo que Jetnews usa para ParagraphType.Text
+                style = MaterialTheme.typography.bodyLarge.copy(lineHeight = 28.sp),
+                modifier = Modifier.padding(bottom = 48.dp)
+            )
+        }
     }
 }
