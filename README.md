@@ -37,3 +37,11 @@ Descargamos y ejecutamos el repositorio oficial `compose-samples`. Evaluamos las
 1. Clonar este repositorio:
    ```bash
    git clone https://github.com/olayashara/LabsCM20261-Gr05.git
+
+---
+
+## 👥 Integrantes
+
+- Jhomar Arrieta CC. 1068136291
+- Shara Olaya CC. 1033177960
+
