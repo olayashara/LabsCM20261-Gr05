@@ -3,5 +3,5 @@
     <string name="title_jetnews">Jetnews Colombia</string>
     <string name="author_prefix">By: </string>
     <string name="btn_back">Back</string>
-    <string name="content_placeholder">The full content of the news downloaded from our REST service in MockAPI would go here...</string>
+    <string name="latest_news">Latest News</string>
 </resources>

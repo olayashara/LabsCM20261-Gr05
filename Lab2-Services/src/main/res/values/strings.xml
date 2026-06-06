@@ -3,5 +3,5 @@
     <string name="title_jetnews">Jetnews Colombia</string>
     <string name="author_prefix">Por: </string>
     <string name="btn_back">Volver</string>
-    <string name="content_placeholder">Aquí iría el contenido completo de la noticia descargada desde nuestro servicio REST en MockAPI...</string>
+    <string name="latest_news">Últimas Noticias</string>
 </resources>

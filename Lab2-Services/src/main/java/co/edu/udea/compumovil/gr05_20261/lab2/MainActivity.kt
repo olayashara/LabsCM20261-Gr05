@@ -20,7 +20,6 @@ import co.edu.udea.compumovil.gr05_20261.lab2.worker.NewsWorker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -110,7 +109,7 @@ fun ArticleList(
         item {
             Text(
                 modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp),
-                text = "Últimas Noticias",
+                text = stringResource(id = R.string.latest_news),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
