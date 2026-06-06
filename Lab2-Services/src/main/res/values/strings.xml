@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Labs20261-Gr05</string>
+    <string name="app_name">Laboratorio 2 Compumovil</string>
+    <string name="title_jetnews">Jetnews Colombia</string>
+    <string name="author_prefix">Por: </string>
+    <string name="btn_back">Volver</string>
+    <string name="content_placeholder">Aquí iría el contenido completo de la noticia descargada desde nuestro servicio REST en MockAPI...</string>
 </resources>
