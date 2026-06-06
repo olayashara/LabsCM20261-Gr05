@@ -1,5 +1,0 @@
-Repositorio: https://github.com/olayashara/LabsCM20261-Gr05.git
-
-Integrantes:
-- Jhomar Arrieta | @JhomarArrieta
-- Nombre Apellido | @olayashara
