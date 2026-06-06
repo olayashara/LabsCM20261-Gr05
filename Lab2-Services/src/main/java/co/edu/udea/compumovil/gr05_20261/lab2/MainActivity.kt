@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -122,7 +123,6 @@ fun ArticleList(
                     .clickable { onArticleClick(article) }
                     .padding(16.dp)
             ) {
-                // Simulamos la imagen usando el mismo modificador exacto de Jetnews
                 val imageModifier = Modifier
                     .heightIn(min = 180.dp)
                     .fillMaxWidth()
@@ -130,11 +130,11 @@ fun ArticleList(
                     .background(MaterialTheme.colorScheme.surfaceVariant)
 
                 Box(modifier = imageModifier, contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = Icons.Default.Info,
+                    AsyncImage(
+                        model = article.imageUrl,
                         contentDescription = null,
-                        modifier = Modifier.size(48.dp),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                        modifier = imageModifier,
+                        contentScale = androidx.compose.ui.layout.ContentScale.Crop
                     )
                 }
                 Spacer(Modifier.height(16.dp))
@@ -188,11 +188,11 @@ fun ArticleDetail(
                 .background(MaterialTheme.colorScheme.surfaceVariant)
 
             Box(modifier = imageModifier, contentAlignment = Alignment.Center) {
-                Icon(
-                    imageVector = Icons.Default.Info,
+                AsyncImage(
+                    model = article.imageUrl,
                     contentDescription = null,
-                    modifier = Modifier.size(64.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f)
+                    modifier = imageModifier,
+                    contentScale = androidx.compose.ui.layout.ContentScale.Crop
                 )
             }
             Spacer(Modifier.height(16.dp))
@@ -235,10 +235,8 @@ fun ArticleDetail(
         }
 
         item {
-            // Paragraph exacto simulado
             Text(
-                text = stringResource(id = R.string.content_placeholder) + "\n\n" + stringResource(id = R.string.content_placeholder),
-                // Este es el estilo que Jetnews usa para ParagraphType.Text
+                text = article.content,
                 style = MaterialTheme.typography.bodyLarge.copy(lineHeight = 28.sp),
                 modifier = Modifier.padding(bottom = 48.dp)
             )

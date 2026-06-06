@@ -3,5 +3,7 @@ package co.edu.udea.compumovil.gr05_20261.lab2.model
 data class Article(
     val id: String,
     val title: String,
-    val author: String
+    val author: String,
+    val content: String = "Contenido no disponible",
+    val imageUrl: String = "https://picsum.photos/400/200"
 )
