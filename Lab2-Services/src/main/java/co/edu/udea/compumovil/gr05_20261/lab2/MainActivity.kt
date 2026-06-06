@@ -124,7 +124,7 @@ fun ArticleList(
                     .padding(16.dp)
             ) {
                 val imageModifier = Modifier
-                    .heightIn(min = 180.dp)
+                    .height(200.dp)
                     .fillMaxWidth()
                     .clip(shape = MaterialTheme.shapes.large)
                     .background(MaterialTheme.colorScheme.surfaceVariant)
@@ -182,7 +182,7 @@ fun ArticleDetail(
 
             // PostHeaderImage exacto
             val imageModifier = Modifier
-                .heightIn(min = 180.dp)
+                .height(200.dp)
                 .fillMaxWidth()
                 .clip(shape = MaterialTheme.shapes.large)
                 .background(MaterialTheme.colorScheme.surfaceVariant)
